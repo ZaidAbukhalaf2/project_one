@@ -52,12 +52,12 @@
                 {{Session::get('success')}}
             </div>
             @endif
-            <form method="POST" action="{{route('create.store')}}">
+            <form method="POST" action="{{route('create.update',$offer->id)}}">
                 @csrf
                <div class="form-group">
 
                 <label for="exampleInputEmail">{{__('messages.Offer Name ar')}}</label>
-                <input type="text" class="form-control" name="name_ar">
+                <input type="text" class="form-control" name="name_ar" value="{{$offer->name_ar}}">
 
                 @error('name_ar')
                 <small class="from-text text-danger">{{$message}}  </small>
@@ -67,7 +67,7 @@
                <div class="form-group">
 
                 <label for="exampleInputEmail">{{__('messages.Offer Name en')}}</label>
-                <input type="text" class="form-control" name="name_en">
+                <input type="text" class="form-control" name="name_en" value="{{$offer->name_en}}" >
 
                 @error('name_en')
                 <small class="from-text text-danger">{{$message}}  </small>
@@ -76,7 +76,7 @@
                <div class="form-group">
 
                 <label for="exampleInputEmail">{{__('messages.Offer price')}}</label>
-                <input type="text" class="form-control" name="price">
+                <input type="text" class="form-control" name="price" value="{{$offer->price}}">
                 @error('price')
                 <small class="from-text text-danger">{{$message}}  </small>
                 @enderror
@@ -85,7 +85,7 @@
                <div class="form-group">
 
                 <label for="exampleInputEmail">{{__('messages.Offer details ar')}}</label>
-                <input type="text" class="form-control" name="details_ar">
+                <input type="text" class="form-control" name="details_ar" value="{{$offer->details_ar}}">
                 @error('details_ar')
                 <small class="from-text text-danger">{{$message}}  </small>
                 @enderror
@@ -94,7 +94,7 @@
                <div class="form-group">
 
                 <label for="exampleInputEmail">{{__('messages.Offer details en')}}</label>
-                <input type="text" class="form-control" name="details_en">
+                <input type="text" class="form-control" name="details_en" value="{{$offer->details_en}}">
                 @error('details_en')
                 <small class="from-text text-danger">{{$message}}  </small>
                 @enderror

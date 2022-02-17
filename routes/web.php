@@ -30,6 +30,12 @@ Route::group(['prefix'=>'Offers'],function(){
 
     Route::get('create','CloudController@create');
     Route::post('store','CloudController@store')->name('create.store');
+    Route::get('edit/{offer_id}','CloudController@editOffer');
+    Route::post('update/{offer_id}','CloudController@updateOffer')->name('create.update');
+
+
+    Route::get('all','CloudController@getAllOffer');
+
 
     });
 });
