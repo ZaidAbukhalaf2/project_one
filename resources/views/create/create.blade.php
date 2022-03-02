@@ -52,7 +52,7 @@
                 {{Session::get('success')}}
             </div>
             @endif
-            <form method="POST" action="{{route('create.store')}}">
+            <form method="POST" action="{{route('create.store')}}" enctype="multipart/form-data">
                 @csrf
                <div class="form-group">
 
@@ -70,6 +70,15 @@
                 <input type="text" class="form-control" name="name_en">
 
                 @error('name_en')
+                <small class="from-text text-danger">{{$message}}  </small>
+                @enderror
+               </div>
+               <div class="form-group">
+
+                <label for="exampleInputEmail">Upload photo</label>
+                <input type="file" class="form-control" name="photo">
+
+                @error('photo')
                 <small class="from-text text-danger">{{$message}}  </small>
                 @enderror
                </div>

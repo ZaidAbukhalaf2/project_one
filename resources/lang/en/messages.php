@@ -21,5 +21,6 @@ return [
     "Offer details"=>'Offer details',
     "Offer operation"=>'Offer operation',
     "update"=>'update',
+    "delete"=>'delete',
 
 ];

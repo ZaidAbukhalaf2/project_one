@@ -1,16 +1,22 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Events\VideoViewer;
 
 use App\Http\Requests\OfferRequest;
 use App\Models\Offer;
-
+use App\Traits\OfferTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Models\Video;
 
 class CloudController extends Controller
 {
+
+    // use OfferTrait;
+
+    
 
     public function __construct()
     {
@@ -32,6 +38,7 @@ class CloudController extends Controller
     {
 
 
+        $file_name = $this->saveimage($request->photo , 'images/offers');
 
         //insert 
         Offer::create([
@@ -40,6 +47,7 @@ class CloudController extends Controller
             'price' => $request->price,
             'details_ar' => $request->details_ar,
             'details_en' => $request->details_en,
+            'photo'=>$file_name,
 
 
         ]);
@@ -54,6 +62,7 @@ class CloudController extends Controller
 
         $offers = Offer::select(
             'id',
+            'photo',
             'name_' . LaravelLocalization::getCurrentLocale() . ' as name',
             'price',
             'details_' . LaravelLocalization::getCurrentLocale() . ' as details'
@@ -81,6 +90,22 @@ class CloudController extends Controller
 
     }
 
+    public function deleteOffer($offer_id){
+
+        //check if offer id exists
+
+      $offer = Offer::find($offer_id);
+
+      if(!$offer)
+
+      return redirect()->back()->with(['error'=>'العرض غير موجود']);
+
+       
+      $offer->delete();
+
+      return redirect()->route('create.delete',$offer_id)->with(['success']);
+    }
+
 
     public function UpdateOffer(OfferRequest $request,$offer_id){
 
@@ -98,6 +123,17 @@ class CloudController extends Controller
 
         //     'name_ar'=>$request->name_ar,
         // ]);
+
+    }
+    
+
+    public function getvideo(){
+
+      $video = Video::first();
+
+      event(new VideoViewer($video));
+
+        return view('youtube')->with('video',$video);
 
     }
 }

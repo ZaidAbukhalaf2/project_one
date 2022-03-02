@@ -21,5 +21,6 @@ return [
     "Offer details"=>' وصف العرض',
     "Offer operation"=>'العمليات',
     "update"=>'تعديل',
+    "delete"=>'حذف',
 
 ];

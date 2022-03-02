@@ -40,6 +40,19 @@
         </div>
       </nav>
 
+
+      @if (Session::has('success'))
+          <div class="alert alert-success">
+            {{Session::get('success')}}
+
+          </div>
+      @endif
+      @if (Session::has('error'))
+          <div class="alert alert-danger">
+            {{Session::get('error')}}
+          </div>
+      @endif
+
       <table class="table">
         <thead>
           <tr>
@@ -47,6 +60,7 @@
             <th scope="col">{{__('messages.Offer Name')}}</th>
             <th scope="col">{{__('messages.Offer price')}}</th>
             <th scope="col">{{__('messages.Offer details')}}</th>
+            <th scope="col">offer photo </th>
             <th scope="col">{{__('messages.Offer operation')}}</th>
 
 
@@ -61,7 +75,9 @@
             <td>{{$offer->name}}</td>
             <td>{{$offer->price}}</td>
             <td>{{$offer->details}}</td>
+            <td><img style="width: 100px" src="{{asset('images/offers/'.$offer->photo)}} " alt=""></td>
             <td><a href="{{url('Offers/edit/'.$offer->id)}}" class="btn btn-success">{{__('messages.update')}}</a></td>
+            <td><a href="{{url('Offers/delete/'.$offer->id)}}" class="btn btn-danger">{{__('messages.delete')}}</a></td>
           </tr>
 
           @endforeach
